@@ -1,0 +1,94 @@
+emove npm / node if you do not have nvm, clean according to instructions
+
+install nvm on machine
+
+nvm install 8.12.0
+
+nvm use 8.12.0 // use it each time you continue with training, if you switch to other versions
+
+npm init
+
+npm install -save-dev webdriverio@4.13.2
+
+npm install -save-dev mocha@5.2.0
+
+npm install -save-dev selenium-standalone@6.15.3
+
+./node_modules/.bin/selenium-standalone install
+
+./node_modules/.bin/selenium-standalone start
+
+./node_modules/.bin/wdio
+
+// init wdio.conf.js - it is set up to sync mode in beginning tests async mode can be required
+
+./node_modules/.bin/wdio
+
+//execute tests in test folder
+
+//wdio.conf.js
+
+services: ['selenium-standalone'],// line 114
+
+npm install wdio-selenium-standalone-service -save-dev
+
+package.json:
+
+"test": "wdio"
+
+//wdio.conf.js
+
+var baseUrl = 'http://www.webdriveruniversity.com';
+
+baseUrl: baseUrl, //82 line
+
+npm install -save-dev chai@4.2.0
+
+
+
+//wdio.conf.js line ~170
+
+    before: function (capabilities, specs) {
+
+        expect = require('chai').expect;
+
+        should = require('chai').should();
+
+    },
+
+//for JSON
+
+npm install -save-dev sync-request
+
+//for reporters:
+npm install -save-dev wdio-junit-reporter@0.4.4
+npm install -save-dev wdio-json-reporter@0.4.0  
+npm install -save-dev wdio-allure-reporter@0.8.3 
+npm install -save-dev -g allure-commandline
+
+
+//wdio.conf.js line ~130
+   reporters: ['dot', 'junit', 'json', 'allure'],
+
+      reporterOptions:{
+        junit: {
+            outputDir: 'reports/junit-results/'
+        },
+        allure: {
+            outputDir: 'reports/allure-results/',
+            disableWebdriverStepsReporting: false,
+            disableWebdriverScreenshotsReporting: false,
+            useCucumberStepReporter: true
+        },
+        json: {
+            outputDir: '/reports/json-results/'
+        }
+    },
+
+allure generate D:\dev\wdio2\reports\allure-results
+allure open
+//wdio.conf.js line ~250 optional
+  after: function (result, capabilities, specs) {
+        var name = 'ERROR-chrome-' +Date.now();
+        browser.saveScreenshot('./errorShots/' +name+'png';)
+    },
